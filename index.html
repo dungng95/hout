@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GreenThread – Sustainable Fashion Marketplace</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    header {
+      background-color: #1e392a;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    nav {
+      background-color: #2f5d42;
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem;
+    }
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero {
+      background: url('https://images.unsplash.com/photo-1521335629791-ce4aec67dd47') no-repeat center center/cover;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    }
+    .hero h1 {
+      font-size: 3rem;
+    }
+    .tab-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+      gap: 1rem;
+    }
+    .tab-buttons button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background-color: #1e392a;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .tab {
+      display: none;
+    }
+    .tab.active {
+      display: block;
+    }
+    .content {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .product {
+      background: white;
+      padding: 1rem;
+      width: 250px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .product img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .add-product-form input {
+      display: block;
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+    }
+    footer {
+      background: #1e392a;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GreenThread</h1>
+    <p>Shop Sustainable. Dress Consciously.</p>
+  </header>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">Brand Stories</a>
+    <a href="#">Join Us</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <div class="hero">
+    <h1>Sustainable Fashion Starts Here</h1>
+  </div>
+
+  <div class="tab-buttons">
+    <button onclick="showTab('buyer')">Buyer View</button>
+    <button onclick="showTab('seller')">Seller View</button>
+  </div>
+
+  <section class="content">
+    <div id="buyer" class="tab active">
+      <h2>Featured Products</h2>
+      <div class="products" id="product-list">
+        <div class="product">
+          <img src="https://images.unsplash.com/photo-1602810313324-cd3e3d77ed53" alt="Organic T-Shirt" />
+          <h3>Organic Cotton T-Shirt</h3>
+          <p>$29.00 – Fair Trade Certified</p>
+        </div>
+        <div class="product">
+          <img src="https://images.unsplash.com/photo-1520614073990-dd602def723c" alt="Upcycled Denim Jacket" />
+          <h3>Upcycled Denim Jacket</h3>
+          <p>$75.00 – Made in EU</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="seller" class="tab">
+      <h2>Add New Product</h2>
+      <form class="add-product-form" onsubmit="addProduct(event)">
+        <input type="text" id="name" placeholder="Product Name" required />
+        <input type="text" id="price" placeholder="Price & Description" required />
+        <input type="url" id="image" placeholder="Image URL" required />
+        <button type="submit">Add Product</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 GreenThread. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function addProduct(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const price = document.getElementById('price').value;
+      const image = document.getElementById('image').value;
+
+      const product = document.createElement('div');
+      product.classList.add('product');
+      product.innerHTML = \`
+        <img src="\${image}" alt="\${name}" />
+        <h3>\${name}</h3>
+        <p>\${price}</p>
+      \`;
+
+      document.getElementById('product-list').appendChild(product);
+      event.target.reset();
+    }
+  </script>
+</body>
+</html>
